@@ -1,0 +1,16 @@
+<resources>
+    <string name="label_menu_close">Exit</string>
+    <string name="label_menu_close_on_disconnect">Close on power disconnect</string>
+    <string name="label_menu_keep_screen_on">Keep screen On</string>
+    <string name="label_menu_show_overlay_controls">Virtual Home button</string>
+    <string name="label_btn_save">Save</string>
+    <string name="label_btn_great">Great</string>
+    <string name="label_menu_change_items">Add / Remove items</string>
+    <string name="label_apps_dialog_title">Select apps to add (%1$d of %2$d)</string>
+    <string name="select_apps_using_toolbar_menu">Select apps using toolbar menu</string>
+    <string name="notify_app_unavailable">It seems like the app no longer available</string>
+    <string name="notify_overlay_controls_enabled">The button will pop-up in third-party apps</string>
+    <string name="service_notify_label">Helper service</string>
+
+    <string name="app_name" translatable="false">BricksOpenLauncher</string>
+</resources>

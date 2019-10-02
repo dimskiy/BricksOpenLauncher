@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/action_change_items"
+        android:icon="@drawable/ic_all_apps"
+        android:title="@string/label_menu_change_items"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_close_on_disconnect"
+        android:checkable="true"
+        android:title="@string/label_menu_close_on_disconnect"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_keep_screen_on"
+        android:checkable="true"
+        android:title="@string/label_menu_keep_screen_on"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_show_overlay_controls"
+        android:checkable="true"
+        android:title="@string/label_menu_show_overlay_controls"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_close_activity"
+        android:title="@string/label_menu_close"
+        app:showAsAction="never" />
+</menu>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="in.evilcorp.bricksopenlauncher.overlaycontrols">
+
+    <uses-permission android:name="android.permission.ACTION_MANAGE_OVERLAY_PERMISSION" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+    <application>
+        <service
+            android:name=".ControlsService"
+            android:enabled="true"
+            android:exported="false" />
+
+        <activity
+            android:name=".PermissionsActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:launchMode="singleInstance"
+            android:excludeFromRecents="true"
+            android:noHistory="true"/>
+
+    </application>
+
+</manifest>

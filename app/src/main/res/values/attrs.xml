@@ -1,0 +1,8 @@
+<resources>
+
+    <declare-styleable name="ShortcutsRecyclerView">
+        <attr name="shortcutsPerScreen" format="integer"/>
+        <attr name="marginBetweenShortcuts" format="dimension"/>
+    </declare-styleable>
+
+</resources>

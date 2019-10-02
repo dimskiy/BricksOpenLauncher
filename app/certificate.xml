@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><certificate>
+   <version>
+      <majorVersion>1</majorVersion>
+      <minorVersion>0</minorVersion>
+   </version>
+   <appIdentifier></appIdentifier>
+   <appListEntry>
+      <name>BricksOpenLauncher</name>
+      <providerName/>
+      <providerURL/>
+      <description/>
+      <appInfo>
+         <appCategory>0x00010001</appCategory>
+      </appInfo>
+      <displayInfo>
+         <contentCategory>0x00000020</contentCategory>
+         <orientation>landscape</orientation>
+      </displayInfo>
+      <audioInfo>
+         <audioType>application</audioType>
+         <contentCategory>0x8000001F</contentCategory>
+      </audioInfo>
+   </appListEntry>
+   <appCertInfoEntry>
+      
+      <entity>
+         <name>ACMS</name>
+         <targetList>
+            <target/>
+         </targetList>
+         <restricted>EU,EPE,CAN,USA,AMERICA,AUS,KOR,JPN,CHN,HKG,TPE,IND,APAC,AFRICA,WORLD</restricted>
+         <nonRestricted>EU,EPE,CAN,USA,AMERICA,AUS,KOR,JPN,CHN,HKG,TPE,IND,APAC,AFRICA,WORLD</nonRestricted>
+      </entity>
+      <properties/>
+   </appCertInfoEntry>
+   <serverProperties>
+      <platform>
+         <platformID>Android</platformID>
+         <blacklistedPlatformVersions/>
+         <runtimeID>Native</runtimeID>
+         <blacklistedRuntimeVersions/>
+      </platform>
+   </serverProperties>
+</certificate>

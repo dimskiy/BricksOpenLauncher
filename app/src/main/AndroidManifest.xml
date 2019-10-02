@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="in.evilcorp.bricksopenlauncher">
+
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.mirrorlink.android.service.ACCESS_PERMISSION" />
+
+    <application
+        android:name=".LauncherApp"
+        android:allowBackup="true"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+
+        <activity
+            android:name=".presentation.MainActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:excludeFromRecents="true"
+            android:finishOnTaskLaunch="true"
+            android:launchMode="singleTask"
+            android:screenOrientation="landscape">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="com.mirrorlink.android.app.LAUNCH" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="com.mirrorlink.android.app.TERMINATE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+        </activity>
+
+        <activity
+            android:name=".presentation.HomeStubActivity"
+            android:enabled="false"
+            android:launchMode="singleTask"
+            android:screenOrientation="landscape">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.HOME" />
+            </intent-filter>
+
+        </activity>
+
+        <service android:name=".service.HelperService" />
+
+    </application>
+
+</manifest>

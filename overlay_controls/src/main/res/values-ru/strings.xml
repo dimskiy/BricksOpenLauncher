@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="btn_open_settings">Открыть настройки</string>
+    <string name="permissions_dialog_description">Для работы кнопки \"ДОМОЙ\" нужны права на отображение поверх других окон.\nПожалуйста, откройте настройки и включите там опцию \"отображать поверх\"."</string>
+    <string name="permissions_dialog_title">Нужна ваша помощь</string>
+    <string name="cannot_open_system_settings">Не удается открыть настройки \"поверх окон\"</string>
+</resources>
