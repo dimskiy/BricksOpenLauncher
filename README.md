@@ -1,3 +1,5 @@
+![](https://lh3.googleusercontent.com/vQnp2EIsRHRUMjgg2BnJ0QXuVIht2HPSyL24HwMNNmTetxmyMNhhRMnfzMC4BJVeOqI=w1920-h914)
+
 # BricksOpenLauncher
 Android launcher app designed for use in car. Supports MirrorLink technology.
 
@@ -11,4 +13,3 @@ If you would like to use the app with Mirrorlink connection, consider precaution
 1)Your car has to have Mirrorlink support.
 2)Your phone or tablet should also have built-in Mirrorlink support.
 3)You can only use the app in parking mode, except the case your head unit activated to use any app anytime.
-
