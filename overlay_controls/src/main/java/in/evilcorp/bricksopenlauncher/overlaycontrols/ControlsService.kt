@@ -1,7 +1,6 @@
 package `in`.evilcorp.bricksopenlauncher.overlaycontrols
 
 import `in`.evilcorp.bricksopenlauncher.overlaycontrols.dependency.OverlayControlsNotificationManager
-import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -14,8 +13,10 @@ import android.view.View
 import android.view.WindowManager
 import android.view.WindowManager.LayoutParams.*
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import dagger.android.DaggerService
 import kotlinx.android.synthetic.main.layout_overlay_controls.view.*
+import timber.log.Timber
 import javax.inject.Inject
 
 fun Intent.isResolvable(ctx: Context?): Boolean {
@@ -31,6 +32,25 @@ class ControlsService : DaggerService() {
         const val INTENT_ACTION_TERMINATE = "bricksopenlauncher.controls_service:stop_overlay_service"
 
         private const val CONTROLS_FADE_DURATION_MS = 200L
+
+        private var serviceStarted = false
+
+        fun start(ctx: Context, intentAction: String? = null) {
+            val intent = Intent(ctx, ControlsService::class.java)
+            intentAction?.let { intent.action = it }
+            ContextCompat.startForegroundService(ctx, intent)
+        }
+
+        fun stop(ctx: Context) {
+            if (serviceStarted) {
+                val intent = Intent(ctx, ControlsService::class.java)
+                ctx.stopService(intent)
+                serviceStarted = false
+                Timber.d("Stopping ControlsService...")
+            } else {
+                Timber.d("Called ControlsService STOP before it finished launching -> skipping")
+            }
+        }
     }
 
     private var overlayControls: View? = null
@@ -47,11 +67,13 @@ class ControlsService : DaggerService() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        serviceStarted = true
+
         intent?.let {
             when (it.action) {
                 INTENT_ACTION_SHOW_CONTROLS -> showControls()
                 INTENT_ACTION_HIDE_CONTROLS -> hideControls()
-                INTENT_ACTION_TERMINATE -> stopSelf()
+                INTENT_ACTION_TERMINATE -> stop(this)
             }
         }
 

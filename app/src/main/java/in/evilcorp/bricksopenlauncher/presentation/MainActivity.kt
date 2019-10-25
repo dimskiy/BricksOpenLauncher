@@ -12,10 +12,8 @@ import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.KeyEvent
-import androidx.core.content.ContextCompat
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import timber.log.Timber
 import javax.inject.Inject
 
 class MainActivity : DaggerAppCompatActivity() {
@@ -75,15 +73,17 @@ class MainActivity : DaggerAppCompatActivity() {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        Timber.d("Activity started")
-        viewStateInteractor.onLauncherUiVisible()
-
+    override fun onStart() {
+        super.onStart()
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.fl_shortcuts_place, LauncherFragment())
-            commit()
+            commitAllowingStateLoss()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewStateInteractor.onLauncherUiVisible()
     }
 
     override fun onPause() {
@@ -110,23 +110,13 @@ class MainActivity : DaggerAppCompatActivity() {
 
     private fun disableDefaultLauncher() {
         toggleLaunchActivityState(PackageManager.COMPONENT_ENABLED_STATE_DEFAULT)
-        terminateHelperService()
+        HelperService.stop(this)
         viewStateInteractor.onLauncherUiTerminate()
-    }
-
-    private fun terminateHelperService() {
-        val intent = Intent(this, HelperService::class.java)
-        stopService(intent)
     }
 
     private fun enableDefaultLauncher() {
         toggleLaunchActivityState(PackageManager.COMPONENT_ENABLED_STATE_ENABLED)
-        launchHelperService()
-    }
-
-    private fun launchHelperService() {
-        val intent = Intent(this, HelperService::class.java)
-        ContextCompat.startForegroundService(this, intent)
+        HelperService.start(this)
     }
 
     private fun toggleLaunchActivityState(newState: Int) {

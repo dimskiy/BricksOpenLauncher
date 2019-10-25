@@ -3,10 +3,8 @@ package `in`.evilcorp.bricksopenlauncher.overlaycontrols
 import `in`.evilcorp.bricksopenlauncher.overlaycontrols.dependency.OverlayControlsManager
 import `in`.evilcorp.bricksopenlauncher.overlaycontrols.dependency.OverlayControlsPreferenceManager
 import android.content.Context
-import android.content.Intent
 import android.os.Build
 import android.provider.Settings
-import androidx.core.content.ContextCompat
 import javax.inject.Inject
 
 
@@ -18,11 +16,7 @@ class OverlayControlsManagerImpl
     private var serviceActionHandler: ((String) -> Unit)? = null
 
     override fun prepareOverlayControlsService() {
-        serviceActionHandler = {
-            val intent = Intent(appCtx, ControlsService::class.java)
-            intent.action = it
-            ContextCompat.startForegroundService(appCtx, intent)
-        }
+        serviceActionHandler = { ControlsService.start(appCtx, it) }
     }
 
     override fun hideOverlayControls() {

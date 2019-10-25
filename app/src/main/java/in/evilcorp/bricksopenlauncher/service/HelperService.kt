@@ -12,15 +12,33 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.os.Binder
 import android.os.PowerManager
+import androidx.core.content.ContextCompat
 import dagger.android.DaggerService
 import timber.log.Timber
 import javax.inject.Inject
 
 class HelperService: DaggerService(), RxLifecycle by RxLifecycleDelegate() {
-
     companion object {
         private const val INTENT_SYS_USB_DISCONNECT = Intent.ACTION_POWER_DISCONNECTED
         private const val WAKE_LOCK_TAG = "bricksopenlauncher.app:keep_screen_on"
+
+        private var serviceStarted = false
+
+        fun start(ctx: Context) {
+            val intent = Intent(ctx, HelperService::class.java)
+            ContextCompat.startForegroundService(ctx, intent)
+        }
+
+        fun stop(ctx: Context) {
+            if (serviceStarted) {
+                val intent = Intent(ctx, HelperService::class.java)
+                ctx.stopService(intent)
+                serviceStarted = false
+                Timber.d("Stopping HelperService...")
+            } else {
+                Timber.d("Called HelperService STOP before it finished launching -> skipping")
+            }
+        }
     }
 
     @Inject
@@ -29,7 +47,8 @@ class HelperService: DaggerService(), RxLifecycle by RxLifecycleDelegate() {
     @Inject
     lateinit var sysNotifyRepo: SystemNotificationRepository
 
-    private val genericReceiver = GenericReceiver()
+    private lateinit var genericReceiver: BroadcastReceiver
+
     private var wakeLock: PowerManager.WakeLock? = null
 
     override fun onBind(intent: Intent?) = Binder()
@@ -47,6 +66,7 @@ class HelperService: DaggerService(), RxLifecycle by RxLifecycleDelegate() {
     }
 
     private fun subscribeUsbBroadcast() {
+        genericReceiver = GenericReceiver()
         val intentFilter = IntentFilter(INTENT_SYS_USB_DISCONNECT)
         registerReceiver(genericReceiver, intentFilter)
     }
@@ -71,6 +91,11 @@ class HelperService: DaggerService(), RxLifecycle by RxLifecycleDelegate() {
             wakeLock?.release()
             Timber.d("Wakelock released")
         }
+    }
+
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        serviceStarted = true
+        return super.onStartCommand(intent, flags, startId)
     }
 
     override fun onDestroy() {
